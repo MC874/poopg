@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+<UserdefinedSymbols/>
+<LuaScript>
+dbk_initialize() 
+dbk_useKernelmodeOpenProcess() 
+dbk_useKernelmodeProcessMemoryAccess() 
+dbk_writesIgnoreWriteProtection(true)
+
+function attach_aow()
+local p = io.popen('tasklist /fi "IMAGENAME eq LdBoxHeadless.exe" /fi "MEMUSAGE gt 300000" /nh', 'r');
+local procInfo = p:read('*a');
+p:close();
+local pid = procInfo:match('%d+');
+pid = tonumber(pid);
+openProcess(pid);
+end
+attach_aow();
+
+  function AOBRep(search, change)
+local aob = AOBScan(search)
+if aob then
+  for i=0,aob.Count-1 do
+    autoAssemble(aob[i]..':\ndb '..change)
+  end
+  aob.Destroy()
+end
+
+function myShowMessage(title, texttoshow, time)
+ local myform = createForm(false)
+ myform.Caption = title
+ myform.BorderStyle = 'bsDialog'
+ myform.AutoSize = true
+ myform.Position = 'poScreenCenter'
+
+ local mylabel = createLabel(myform)
+ mylabel.Caption = texttoshow
+ mylabel.BorderSpacing.Around = 20
+
+ local t=createTimer(myform)
+ t.Interval = time
+ t.OnTimer = function () myform.destroy() end
+
+ myform.show()
+
+end
+end
+ 
+----------------HACK MENU START----------------
+
+function emu()
+emuscan='? ? ? ? ? ? ? ? 24 D0 4D E2 00 A0 A0 E1 DC 04 9F E5 01 80 A0'
+emubypass='00 00 A0 E3 1E FF 2F E1 24 D0 4D E2 00 A0 A0 E1 DC 04 9F E5 01 80 A0'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+ 
+emuscan='63 64 04 F0 4F 2D E9 1C B0 8D E2 24'
+emubypass='63 64 04 00 00 A0 E3 1E FF 2F E1 24'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='05 00 A0 E1 64 10 A0 E3 62 FA FF EB'
+emubypass='05 00 A0 E1 64 10 A0 E3 00 00 00 00'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='05 00 A0 E1 64 10 A0 E3 95 01 00 EB'
+emubypass='05 00 A0 E1 64 10 A0 E3 00 00 00 00'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='04 AC FF EB 00 40 A0 E3 01 00 50 E3'
+emubypass='00 00 00 00 00 40 A0 E3 01 00 50 E3'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='C6 AC FF EB 01 00 50 E3 20 00 00 1A'
+emubypass='00 00 00 00 01 00 50 E3 20 00 00 1A'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='00 00 A0 E3 00 10 A0 E3 D3 AC FF EA'
+emubypass='00 00 A0 E3 00 10 A0 E3 00 00 00 00'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='CA 30 01 EB 00 00 C6 E5 10 03 97 E5'
+emubypass='00 00 00 00 00 00 C6 E5 10 03 97 E5'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+
+emuscan='? ? ? ? ? ? ? ? 24 D0 4D E2 00 A0 A0 E1 DC 04 9F E5 01 80 A0'
+emubypass='00 00 A0 E3 1E FF 2F E1 24 D0 4D E2 00 A0 A0 E1 DC 04 9F E5 01 80 A0'
+AOBRep(emuscan, emubypass)
+showMessage("Bypass Emu Enabled")
+end
+ 
+ 
+--- START MENU FROM HERE ---
+MyForm = createForm(true)
+MyForm.Caption = 'BYPASS EMU | ZRC-EVO'
+MyForm.Width = 235
+MyForm.Height = 175
+ 
+notice = createLabel(MyForm)
+notice.Caption= '*You Need Active This In Tencent Logo*'
+notice.Left = 20
+notice.Top = 10
+ 
+-- BUTTON --
+norecon = createButton(MyForm)
+norecon.Left = 65
+norecon.Top = 40
+norecon.Width = 100
+norecon.Height = 100
+norecon.onClick = emu
+norecon.Caption = 'Bypass !!!'
+
+</LuaScript>
+</CheatTable>

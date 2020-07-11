@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+<UserdefinedSymbols/>
+<LuaScript>
+function attach_aow()
+local p = io.popen('tasklist /fi "IMAGENAME eq aow_exe.exe" /fi "MEMUSAGE gt 300000" /nh', 'r');
+local procInfo = p:read('*a');
+p:close();
+local pid = procInfo:match('%d+');
+pid = tonumber(pid);
+openProcess(pid);
+end
+attach_aow();
+
+  function AOBRep(search, change)
+local aob = AOBScan(search)
+if aob then
+  for i=0,aob.Count-1 do
+    autoAssemble(aob[i]..':\ndb '..change)
+  end
+  aob.Destroy()
+end
+
+function myShowMessage(title, texttoshow, time)
+ local myform = createForm(false)
+ myform.Caption = title
+ myform.BorderStyle = 'bsDialog'
+ myform.AutoSize = true
+ myform.Position = 'poScreenCenter'
+
+ local mylabel = createLabel(myform)
+ mylabel.Caption = texttoshow
+ mylabel.BorderSpacing.Around = 20
+
+ local t=createTimer(myform)
+ t.Interval = time
+ t.OnTimer = function () myform.destroy() end
+
+ myform.show()
+
+end
+end
+
+function emu()
+
+------------ LIBTERSAFE -----
+
+emuscan='03 C6 8F E2 16 CA 8C E2 F4 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe write', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 B4 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe time', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 1C FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe strcpy', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 04 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe closdedir', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 1C FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe mprotect', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 24 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe cacheflush', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 64 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe strcat', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 D4 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe sprintf', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 14 F5 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe vnsprintf', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 14 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe kill', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 34 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe __android_log_print', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 A4 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe strlcpy', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 EC FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe fprintf', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 44 FE BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'Progress', 'libtersafe __cxa_finalize', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 3C F6 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe memcpy', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 94 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe sscanf', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 0C FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe fclose', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 FC F5 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe memmove', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 94 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe memcmp', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 84 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe fstat', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 7C FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe fwrite', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 D4 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe send', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 B4 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe gettimeofday', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 EC FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe malloc', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 9C FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe atoi', 1500)
+
+-------------- LIBTERSAFE TSS COMP -----------
+
+emuscan='03 C6 8F E2 16 CA 8C E2 8C FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_TssSDKDelReportData', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 6C FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_tp2_dec_tss_info', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 44 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_tss_enable_get_report_data', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 34 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_init', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 14 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_setsenddatatosvrcb', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 0C FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_senddatatosdk', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 04 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_senddatatosvr', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 FC FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_onruntimeinfo', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 F4 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_setrootkittipstate', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 EC FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_setcancelupdaterootkit', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 BC FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_hasMatchRate', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 B4 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_loadConfig', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 AC FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_loadRootkitTipStr', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 A4 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_loadMessageBoxInfo', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 9C FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_tss_log_str', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 44 FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_Java_com_tencent_tp_TssSdk_getsdkantidata', 1500)
+
+emuscan='03 C6 8F E2 16 CA 8C E2 3C FB BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libtersafe j_tss_get_report_data2', 1500)
+
+---------------- LIBUE4 PLT COMPONENT --------------
+emuscan='58 C6 8F E2 EB CA 8C E2 64 F8 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 time', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 2C F4 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 strcpy', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 94 F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 strcat', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 C4 F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 sprintf', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 7C FC BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 kill', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 84 FA BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 __android_log_print', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 24 F2 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 fprintf', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 5C FD BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 memcpy', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 04 FD BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 sscanf', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 04 FD BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 fclose', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 0C FD BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 memmove', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 54 F9 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 memcmp', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 44 FC BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 fstat', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 9C F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 send', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 AC FB BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 gettimeofday', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 6C F4 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 atoi', 1500)
+
+emuscan='58 C6 8F E2 EA CA 8C E2 64 F8 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 raise', 1500)
+
+------- LIBUE4 TSS -------
+
+emuscan='58 C6 8F E2 EB CA 8C E2 D4 F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_sdk_setuserinfo_ex', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 CC F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_sdk_setgamestatus', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 AC F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_sdk_rcv_anti_data', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 AC F7 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_sdk_ioctl', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 E4 F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_sdk_init', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 DC F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_get_report_data2', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 BC F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_get_report_data', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 B4 F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 tss_del_report_data', 1500)
+
+-------- LIBUE4 GCLOUD ------
+
+emuscan='58 C6 8F E2 EB CA 8C E2 24 F7 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN6GCloud13DolphinHelper10InstallAPKEPKc', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 0C F6 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN6GCloud13DolphinHelper13GetCurApkPathEv', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 FC F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN6GCloud21GetGCloudRemoteConfigEv', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 DC F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN12gcloud_voice18IGCloudVoiceNotifyC2Ev', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 D4 F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN12gcloud_voice18IGCloudVoiceNotifyD2Ev', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 BC F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN12gcloud_voice18IGCloudVoiceNotify14OnReportPlayerENS_23GCloudVoiceCompleteCodeEPKc', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 B4 F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZNK6GCloud4Conn15ConnectorResult8ToStringEv', 1500)
+
+emuscan='58 C6 8F E2 EB CA 8C E2 6C F5 BC E5 58 C6 8F E2'
+emubypass='58 C6 8F E2 00 F0 20 E3 1E FF 2F E1 58 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libue4 _ZN6GCloud7IGCloud11GetInstanceEv', 1500)
+
+----------- LIBCUBEHAWK PLT COMPONENT -----------
+emuscan='00 C6 8F E2 9B CA 8C E2 F0 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk write', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 40 F6 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk time', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 70 F6 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk strcpy', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 18 F7 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk sprintf', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 10 FB BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk vnsprintf', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 20 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk __android_log_print', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 08 F7 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk fprintf', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 50 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk __cxa_finalize', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 30 FB BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk memcpy', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 E0 F3 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk sscanf', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 F8 F6 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk fclose', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 68 FA BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk memmove', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 68 F7 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk memcmp', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 B8 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk fstat', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 40 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk fwrite', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 90 F1 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk send', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 E8 FC BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk malloc', 1500)
+
+emuscan='00 C6 8F E2 9D CA 8C E2 D0 F5 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk atoi', 1500)
+
+emuscan='00 C6 8F E2 9B CA 8C E2 90 F8 BC E5 00 C6 8F E2'
+emubypass='00 C6 8F E2 00 F0 20 E3 1E FF 2F E1 00 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libcubehawk raise', 1500)
+
+----------- LIBGCLOUD PLT COMPONENT ---------
+emuscan='03 C6 8F E2 1C CA 8C E2 24 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud write', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 AC FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud time', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 34 F0 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud strcpy', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 9C FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud mprotect', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 14 FF BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud strcat', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 54 F1 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud sprintf', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 54 F9 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud vnsprintf', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 94 F1 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud __android_log_print', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 64 FD BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud fprintf', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 1C F4 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud __cxa_finalize', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 8C F3 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud memcpy', 1500)
+
+emuscan='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud sscanf', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 4C F0 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud fclose', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 D4 F2 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud memmove', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 F4 FC BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud fwrite', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 B4 F0 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud send', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 FC F0 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud gettimeofday', 1500)
+
+emuscan='03 C6 8F E2 1D CA 8C E2 7C F1 BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud malloc', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 24 FF BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud atoi', 1500)
+
+emuscan='03 C6 8F E2 1C CA 8C E2 F4 FA BC E5 03 C6 8F E2'
+emubypass='03 C6 8F E2 00 F0 20 E3 1E FF 2F E1 03 C6 8F E2'
+AOBRep(emuscan, emubypass)
+memrec_freeze()  
+myShowMessage('Progress', 'libgcloud raise', 1500)
+end
+
+--- START MENU FROM HERE ---
+MyForm = createForm(true)
+MyForm.Caption = 'BYPASS EMU | ZRC-EVO'
+MyForm.Width = 235
+MyForm.Height = 175
+ 
+notice = createLabel(MyForm)
+notice.Caption= '*You Need Active This In Tencent Logo*'
+notice.Left = 20
+notice.Top = 10
+ 
+-- BUTTON --
+norecon = createButton(MyForm)
+norecon.Left = 65
+norecon.Top = 40
+norecon.Width = 100
+norecon.Height = 100
+norecon.onClick = emu
+norecon.Caption = 'Bypass !!!'
+ 
+</LuaScript>
+</CheatTable>
